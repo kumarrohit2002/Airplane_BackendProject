@@ -1,14 +1,11 @@
 const {StatusCodes}=require('http-status-codes');
-
+const {ErrorResponse}= require('../utils/common')
 
 function validateCreateRequirest(req,res,next){
     if(!req.body.modelNumber){
-        return res.status(StatusCodes.BAD_REQUEST).json({
-            success:false,
-            message:'something went worng while creating airplanes',
-            data:{},
-            error:{exceptions:'Model Number not found in the oncoming reqest in the correct form'}
-        })
+        ErrorResponse.message='something went worng while creating airplanes';
+        ErrorResponse.error='Model Number not found in the oncoming reqest in the correct form';
+        return res.status(StatusCodes.BAD_REQUEST).json(ErrorResponse);
     }
     next();
 } 

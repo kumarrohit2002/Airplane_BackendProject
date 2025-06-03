@@ -22,10 +22,8 @@ async function createAirplane(req,res){
         return res.status(StatusCodes.CREATED).json(SuccessResponse);
 
     }catch(error){
-        console.log(error);
-        ErrorResponse.message='Something went worng while creating Airplane';
         ErrorResponse.error=error;
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ErrorResponse);
+        return res.status(error.statusCode).json(ErrorResponse);
     }
 }
 

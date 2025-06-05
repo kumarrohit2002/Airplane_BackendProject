@@ -1,5 +1,7 @@
 const { where } = require('sequelize');
 const {Logger} =require('../config/logger-config');
+const AppError = require('../utils/errors/app-error');
+const { StatusCodes } = require('http-status-codes');
 
 class CrudRepository{
     constructor(model){
@@ -14,51 +16,34 @@ class CrudRepository{
 
 
     async destroy(data){
-        try{
-            const response=await this.model.destroy({
-                where:{
-                    id:data
-                }
-            });
-            return response;
-        }catch(error){
-            Logger.error('Something went wrong in the crud Repo : create');
-            throw error;
-        }
+        const response=await this.model.destroy({
+            where:{
+                id:data
+            }
+        });
+        return response;
     }
 
     async get(data){
-        try{
-            const response=await this.model.findByPk(data);
-            return response;
-        }catch(error){
-            Logger.error('Something went wrong in the crud Repo : create');
-            throw error;
+        const response=await this.model.findByPk(data);
+        if(!response){
+            throw new AppError('The airplane you requested is not present',StatusCodes.NOT_FOUND);
         }
+        return response;
     }
 
     async getAll(){
-        try{
-            const response=await this.model.findAll();
-            return response;
-        }catch(error){
-            Logger.error('Something went wrong in the crud Repo : create');
-            throw error;
-        }
+        const response=await this.model.findAll();
+        return response;
     }
 
     async update(id,data){ //data:{col:val,.....}
-        try{
-            const response=await this.model.update(data,{
-                where:{
-                    id:id
-                }
-            });
-            return response;
-        }catch(error){
-            Logger.error('Something went wrong in the crud Repo : create');
-            throw error;
-        }
+        const response=await this.model.update(data,{
+            where:{
+                id:id
+            }
+        });
+        return response;
     }
 }
 

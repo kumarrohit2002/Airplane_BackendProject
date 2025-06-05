@@ -31,9 +31,21 @@ async function getAirplanes(){
     }
 }
 
-async function getAirplane(data){
+async function getAirplane(id){
     try{
-        const airplanes=await airplaneRepository.get(data);
+        const airplanes=await airplaneRepository.get(id);
+        return airplanes;
+    }catch(error){
+        if(error.statusCode==StatusCodes.NOT_FOUND){
+            throw error;
+        }
+        throw new AppError('Cannot fetch data of all the airplanes ',StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
+
+async function destoryAirplane(id){
+    try{
+        const airplanes=await airplaneRepository.destroy(id);
         return airplanes;
     }catch(error){
         if(error.statusCode==StatusCodes.NOT_FOUND){
@@ -47,5 +59,6 @@ async function getAirplane(data){
 module.exports={
     createAirplane,
     getAirplanes,
-    getAirplane
+    getAirplane,
+    destoryAirplane
 }

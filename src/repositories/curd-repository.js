@@ -21,6 +21,9 @@ class CrudRepository{
                 id:data
             }
         });
+        if(!response){
+            throw new AppError('The airplane you requested to delete is not present',StatusCodes.NOT_FOUND);
+        }
         return response;
     }
 

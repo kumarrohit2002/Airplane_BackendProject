@@ -72,6 +72,7 @@ async function destoryAirplane(req,res){
         ErrorResponse.error=error;
         return res.status(error.statusCode).json(ErrorResponse);
     }
+    
 }
 
 

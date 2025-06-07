@@ -27,6 +27,7 @@ class CrudRepository{
         return response;
     }
 
+    
     async get(data){
         const response=await this.model.findByPk(data);
         if(!response){

@@ -18,7 +18,7 @@ app.get('/',(req,res)=>{
 
 app.listen(ServerConfig.PORT,async()=>{
     console.log(`Server is Runing Successfully on Url:http://localhost:${ServerConfig.PORT}`);
-    const {City,Airport}=require('./models')
+    // const {City,Airport}=require('./models')
     // const city=await City.findByPk(1);
     // console.log(city)
 })

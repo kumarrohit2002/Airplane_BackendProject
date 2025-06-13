@@ -1,20 +1,20 @@
 const express=require('express');
 const router=express.Router();
 
-const {AirplainController}=require('../../controllers');
+const {AirplaneController}=require('../../controllers');
 const {AirplaneMiddlewares}=require('../../middlewares');
 
 // -> /api/v1/airplanes POST
-router.post('/',AirplaneMiddlewares.validateCreateRequirest,AirplainController.createAirplane);
+router.post('/',AirplaneMiddlewares.validateCreateRequirest,AirplaneController.createAirplane);
 
 // -> /api/v1/airplanes GET
-router.get('/',AirplainController.getAirplanes);
+router.get('/',AirplaneController.getAirplanes);
 
 // -> /api/v1/airplanes/:id GET
-router.get('/:id',AirplainController.getAirplane);
+router.get('/:id',AirplaneController.getAirplane);
 
 // -> /api/v1/airplanes/:id delete
-router.delete('/:id',AirplainController.destoryAirplane);
+router.delete('/:id',AirplaneController.destoryAirplane);
 
 
 
